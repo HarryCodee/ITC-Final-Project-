@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adamson Canteen - Full Menu</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", Arial, sans-serif; background: #fffaf0; color: #1a1a1a; }
+
+  header { display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; background: #fff; }
+  .logo { font-size: 26px; font-weight: 800; color: #1100cb; text-decoration: none; }
+  .logo span { display: block; font-size: 9px; letter-spacing: 2px; color: #333; }
+  nav a { margin: 0 14px; text-decoration: none; color: #555; font-size: 14px; }
+  nav a.active { color: #000; font-weight: 600; }
+
+  .btn { display: inline-block; background: #f6c335; color: #000; text-decoration: none; padding: 13px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; }
+  .btn:hover { background: #e8b522; }
+
+ 
+  .banner { background: #f1eee8; padding: 50px 48px; }
+  .banner small { color: #1100cb; font-weight: 600; font-size: 13px; }
+  .banner h1 { font-size: 40px; margin-top: 6px; }
+  .banner p { font-size: 13px; color: #666; margin-top: 8px; }
+
+  
+  .story { display: flex; align-items: center; gap: 50px; padding: 60px 48px; flex-wrap: wrap; }
+  .story-img { width: 380px; height: 380px; max-width: 100%; border-radius: 24px; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.12); overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 120px; }
+  .story-img img { width: 100%; height: 100%; object-fit: cover; }
+  .story-text { flex: 1; min-width: 300px; max-width: 540px; }
+  .story-text h2 { font-size: 32px; margin-bottom: 16px; }
+  .story-text h2 span { color: #1100cb; }
+  .story-text p { color: #666; font-size: 14px; line-height: 1.8; margin-bottom: 14px; }
+
+ 
+  .stats { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 24px; background: #fff; margin: 0 48px; padding: 32px; border-radius: 20px; box-shadow: 0 4px 14px rgba(0,0,0,.06); text-align: center; }
+  .stats h3 { font-size: 32px; color: #1100cb; }
+  .stats p { font-size: 13px; color: #777; margin-top: 4px; }
+
+ 
+  .why { padding: 60px 48px; }
+  .why h2 { font-size: 30px; text-align: center; margin-bottom: 8px; }
+  .why > p { text-align: center; color: #777; font-size: 13px; margin-bottom: 32px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .why-card { background: #111024; border: 1px solid #2a2a2a; border-radius: 20px; padding: 28px 24px; color: #fff; transition: transform .2s; }
+  .why-card:hover { transform: translateY(-4px); }
+  .why-card .icon { font-size: 36px; margin-bottom: 14px; }
+  .why-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .why-card p { font-size: 13px; line-height: 1.6; color: #ddd; }
+
+  
+  .cta { margin: 0 48px 60px; background:  #111024; border-radius: 24px; padding: 44px 40px; text-align: center; }
+  .cta h2 { color:white;font-size: 30px; margin-bottom: 10px; }
+  .cta p { font-size: 13px; color: #ffffff; margin-bottom: 22px; }
+  .cta .btn { color:white; background: #1100cb; }
+  .cta .btn:hover { color:black; background: #f3f3f3; }
+
+  footer { text-align: center; font-size: 12px; color: #888; padding: 24px; }
+
+  @media (max-width: 800px) {
+    header, .banner, .story, .why { padding-left: 18px; padding-right: 18px; }
+    .stats, .cta { margin-left: 18px; margin-right: 18px; }
+    nav { display: none; }
+    .banner h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">ADAMSON<span>CANTEEN</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="about.html" class="active">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="banner">
+  <small>About Us</small>
+  <h1>Home-style meals, made with love.</h1>
+  <p>We believe that good food makes every school day better. Our campus food hub is dedicated to providing students with delicious, affordable, and satisfying meals that fit their busy schedules.</p>
+</section>
+
+<section class="story">
+  <div class="story-img">
+    <img src="CSS/stcanteen.png" alt="Our kitchen" onerror="this.parentElement.innerHTML='👨‍🍳'">
+  </div>
+  <div class="story-text">
+    
+    <h2> Your Campus <span>Food Destination</span></h2>
+    <p>Welcome to our campus food hub! Conveniently located in ST Building, we are here to serve students with delicious, affordable, and satisfying meals throughout the school day.</p>
+    <p>Whether you're looking for a quick lunch between classes or a hearty meal to recharge, we offer a variety of dishes to satisfy your cravings without going beyond your budget.</p>
+    <p>We're more than just a place to eat — we're part of your everyday campus experience.</p>
+    <p>Good food, affordable prices, and convenient dining — all just around the corner!</p>
+  </div>
+</section>
+
+<section class="stats">
+  <div><h3>40+</h3><p>Meals on the Menu</p></div>
+  <div><h3>₱50</h3><p>Meals Starting At</p></div>
+  <div><h3>Daily</h3><p>Freshly Cooked</p></div>
+</section>
+
+<section class="why">
+  <h2>Eat with us Klasmeyts!</h2>
+  <p>A few things we're proud of.</p>
+  <div class="cards">
+    <div class="why-card">
+      <div class="icon">🍳</div>
+      <h3>Cooked Fresh</h3>
+      <p>Our meals are prepared every day using fresh ingredients, never reheated leftovers.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">💸</div>
+      <h3>Affordable Prices</h3>
+      <p>Student-friendly prices for everyday meals.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">🔀</div>
+      <h3>Variety</h3>
+      <p>A wide selection of delicious meal options.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Hungry already?</h2>
+  <p>Check out our full menu and pick your meal today.</p>
+  <a href="menu.html" class="btn">View Menu</a>
+</section>
+
+<footer>© 2026 Adamson Canteen. All rights reserved.</footer>
+
+</body>
+</html>
+

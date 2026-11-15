@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adamson Canteen - Full Menu</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", Arial, sans-serif; background: #fff; color: #1a1a1a; }
+
+  
+  header { display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; background: #fff; }
+  .logo { font-size: 26px; font-weight: 800; color: #1100cb; text-decoration: none; }
+  .logo span { display: block; font-size: 9px; letter-spacing: 2px; color: #333; }
+  nav a { margin: 0 14px; text-decoration: none; color: #555; font-size: 14px; }
+  nav a.active { color: #000; font-weight: 600; }
+
+ 
+  .banner { background: #f1eee8; padding: 36px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .banner h1 { font-size: 34px; }
+  .banner p { font-size: 13px; color: #666; margin-top: 6px; }
+  .search { display: flex; align-items: center; background: #fff; border-radius: 40px; padding: 8px 10px 8px 20px; width: 380px; max-width: 100%; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .search input { flex: 1; border: none; outline: none; font-size: 14px; }
+  .search button { color: white; background: #1100cb; border: none; padding: 10px 22px; border-radius: 30px; font-weight: 600; cursor: pointer; }
+
+  
+  .layout { display: flex; gap: 28px; padding: 32px 48px; align-items: flex-start; }
+  .filters { width: 220px; flex-shrink: 0; border: 1px solid #eee; border-radius: 14px; padding: 18px; }
+  .filters-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .filters-top h3 { font-size: 16px; }
+  .filters-top button { background: none; border: none; color: #888; font-size: 12px; cursor: pointer; }
+  .filters h4 { font-size: 13px; margin-bottom: 10px; }
+  .filters label { display: flex; align-items: center; gap: 10px; font-size: 13px; margin-bottom: 10px; cursor: pointer; }
+  .filters input[type="checkbox"] { width: 16px; height: 16px; accent-color: #1100cb; cursor: pointer; }
+
+  .content { flex: 1; }
+  .top-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+  .count { font-size: 14px; font-weight: 600; }
+  .day-pick { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #555; }
+  .day-pick select { padding: 10px 14px; border: 1px solid #e3e3e3; border-radius: 12px; font-family: inherit; font-size: 14px; background: #fff; cursor: pointer; outline: none; }
+  .day-pick select:focus { border-color: #1100cb; }
+   
+
+  
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .card { background:  #26253a; border: 1px solid #2a2a2a; border-radius: 20px; padding: 14px 14px 18px; color: #fff; transition: transform .2s; }
+  .card:hover { transform: translateY(-4px); }
+  .card .img { width: 100%; height: 170px; border-radius: 14px; overflow: hidden; background: #1c1c1c; display: flex; align-items: center; justify-content: center; font-size: 60px; }
+  .card .img img { width: 100%; height: 100%; object-fit: cover; }
+  .title-row { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; gap: 8px; }
+  .title-row h3 { font-size: 18px; }
+  .badge { background: #008236; color: #22c55e; font-size: 12px; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+  .badge.daily { background: #3d2f0f; color: #f6c335; }
+  .desc { font-size: 13px; line-height: 1.5; color: #ddd; margin: 12px 0 16px; min-height: 40px; }
+  .bottom { display: flex; justify-content: space-between; align-items: center; }
+  .kcal { color: #ccc; font-size: 15px; }
+  .price { color: #22c55e; font-size: 22px; font-weight: 700; }
+
+  .empty { text-align: center; color: #888; padding: 60px 0; display: none; }
+footer { text-align: center; font-size: 12px; color: #888; padding: 24px; }
+
+  @media (max-width: 800px) {
+    header, .banner, .layout { padding-left: 18px; padding-right: 18px; }
+    .layout { flex-direction: column; }
+    .filters { width: 100%; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">ADAMSON<span>CANTEEN</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="menu.html" class="active">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="banner">
+  <div>
+    <h1>Full Menu</h1>
+    <p id="subtitle"></p>
+  </div>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Search meals...">
+    <button id="searchBtn">Search</button>
+  </div>
+</section>
+
+<main class="layout">
+  <aside class="filters">
+    <div class="filters-top">
+      <h3>Filters</h3>
+      <button id="clearBtn">Clear all</button>
+    </div>
+    <h4>Category</h4>
+    <div id="categoryList"></div>
+  </aside>
+
+  <section class="content">
+    <div class="top-row">
+      <div class="count" id="count"></div>
+      <div class="day-pick">
+        <label for="daySelect">Available on:</label>
+        <select id="daySelect"></select>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty">No meals found 😢</div>
+  </section>
+
+</main>
+<footer><a href="index.html">© 2026 Adamson Canteen. All rights reserved.<a></footer>
+
+<script>
+  // WeEKLY SCHEDULE (8 meals per day, Monday to Friday) 
+  const schedule = {
+    Monday: [
+      { name: "Chicken Adobo", img:"Chicken Adobo.png", cat: "Chicken", kcal: 520, price: 75, popular: true, desc: "Tender chicken simmered in soy sauce, vinegar, and garlic, served with rice." },
+      { name: "Pork Menudo", cat: "Pork", kcal: 580, price: 80, desc: "Pork chunks cooked in tomato sauce with potatoes and carrots." },
+      { name: "Fried Chicken", cat: "Chicken", kcal: 650, price: 85, popular: true, desc: "Crispy golden fried chicken served with steamed rice." },
+      { name: "Pork Giniling", cat: "Pork", kcal: 550, price: 70, desc: "Ground pork sautéed with potatoes, carrots, and tomato sauce." },
+      { name: "Tortang Talong", cat: "Vegetable", kcal: 430, price: 55, desc: "Grilled eggplant coated in egg and pan-fried, served with rice." },
+      { name: "Fried Tilapia", cat: "Fish", kcal: 560, price: 75, desc: "Golden fried tilapia served with rice and dipping sauce." },
+      { name: "Chicken Afritada", cat: "Chicken", kcal: 540, price: 80, desc: "Chicken stewed in tomato sauce with potatoes and bell peppers." },
+      { name: "Pork Sisig", cat: "Pork", kcal: 650, price: 90, popular: true, desc: "Sizzling chopped pork seasoned with onions and spices." }
+    ],
+    Tuesday: [
+      { name: "Chicken Tinola", cat: "Chicken", kcal: 480, price: 75, desc: "Chicken soup with ginger, green papaya, and leafy vegetables." },
+      { name: "Beef Tapa", cat: "Beef", kcal: 620, price: 95, desc: "Marinated beef strips served with garlic rice." },
+      { name: "Pork Sinigang", cat: "Pork", kcal: 520, price: 80, desc: "Sour pork soup with fresh vegetables and rice." },
+      { name: "Chicken Curry", cat: "Chicken", kcal: 600, price: 85, desc: "Chicken cooked in creamy curry sauce with potatoes." },
+      { name: "Lumpiang Shanghai", cat: "Pork", kcal: 580, price: 65, desc: "Crispy pork spring rolls served with rice and dipping sauce." },
+      { name: "Pork Barbecue", cat: "Pork", kcal: 590, price: 75, desc: "Grilled marinated pork skewers with steamed rice." },
+      { name: "Ginataang Kalabasa", cat: "Vegetable", kcal: 450, price: 60, desc: "Squash and vegetables cooked in creamy coconut milk." },
+      { name: "Fried Bangus", cat: "Fish", kcal: 580, price: 80, desc: "Crispy fried milkfish served with rice and dipping sauce." }
+    ],
+    Wednesday: [
+      { name: "Pork Bistek", cat: "Pork", kcal: 590, price: 85, desc: "Pork slices cooked in soy sauce, calamansi, and onions." },
+      { name: "Chicken Inasal", cat: "Chicken", kcal: 610, price: 90, popular: true, desc: "Grilled chicken marinated with lemongrass and local spices." },
+      { name: "Beef Caldereta", cat: "Beef", kcal: 680, price: 100, desc: "Tender beef stewed in rich tomato sauce with potatoes and carrots." },
+      { name: "Pork Chop", cat: "Pork", kcal: 650, price: 85, desc: "Breaded and fried pork chop served with rice." },
+      { name: "Chicken Barbecue", cat: "Chicken", kcal: 570, price: 85, desc: "Sweet and savory grilled chicken served with rice." },
+      { name: "Ginisang Monggo", cat: "Vegetable", kcal: 420, price: 50, desc: "Mung beans sautéed with garlic, onions, and vegetables." },
+      { name: "Fish Escabeche", cat: "Fish", kcal: 550, price: 85, desc: "Fried fish topped with sweet and sour vegetable sauce." },
+      { name: "Chicken Teriyaki", cat: "Chicken", kcal: 590, price: 90, desc: "Grilled chicken glazed with sweet Japanese-style teriyaki sauce." }
+    ],
+    Thursday: [
+      { name: "Chicken Pastel", cat: "Chicken", kcal: 620, price: 90, desc: "Chicken cooked in creamy sauce with potatoes and carrots." },
+      { name: "Lechon Kawali", cat: "Pork", kcal: 750, price: 100, popular: true, desc: "Deep-fried crispy pork belly served with rice and dipping sauce." },
+      { name: "Beef Pares", cat: "Beef", kcal: 680, price: 95, desc: "Tender beef braised in sweet soy-based sauce with garlic rice." },
+      { name: "Pork Humba", cat: "Pork", kcal: 680, price: 90, desc: "Slow-cooked pork belly in a sweet and savory sauce." },
+      { name: "Chicken Fillet", cat: "Chicken", kcal: 590, price: 80, desc: "Crispy breaded chicken fillet served with rice and gravy." },
+      { name: "Paksiw na Isda", cat: "Fish", kcal: 450, price: 65, desc: "Fish simmered in vinegar, garlic, ginger, and spices." },
+      { name: "Chopsuey", cat: "Vegetable", kcal: 400, price: 60, desc: "Mixed vegetables stir-fried with a savory sauce." },
+      { name: "Pork Tocino", cat: "Pork", kcal: 650, price: 80, desc: "Sweet cured pork served with rice." }
+    ],
+    Friday: [
+      { name: "Chicken Caldereta", cat: "Chicken", kcal: 620, price: 85, desc: "Chicken simmered in rich tomato sauce with vegetables." },
+      { name: "Beef Tapa", cat: "Beef", kcal: 620, price: 95, desc: "Savory marinated beef strips served with garlic rice." },
+      { name: "Pork Afritada", cat: "Pork", kcal: 600, price: 85, desc: "Pork stewed in tomato sauce with potatoes and carrots." },
+      { name: "Chicken Cordon Bleu", cat: "Chicken", kcal: 720, price: 110, desc: "Breaded chicken stuffed with ham and cheese, served with rice." },
+      { name: "Fried Galunggong", cat: "Fish", kcal: 480, price: 60, desc: "Crispy fried round scad served with steamed rice." },
+      { name: "Pork Sisig", cat: "Pork", kcal: 650, price: 90, desc: "Chopped seasoned pork with onions and spices, served with rice." },
+      { name: "Ginisang Sayote", cat: "Vegetable", kcal: 400, price: 55, desc: "Sautéed chayote with garlic, onions, and vegetables." },
+      { name: "Chicken Barbecue", cat: "Chicken", kcal: 570, price: 85, desc: "Smoky grilled chicken glazed with barbecue sauce." }
+    ]
+  };
+
+  // RICE AND DRINKS (available every day)
+  const everyday = [
+    { name: "Plain Rice", cat: "Rice", kcal: 205, price: 15, daily: true, desc: "Freshly steamed white rice." },
+    { name: "Garlic Rice", cat: "Rice", kcal: 260, price: 20, daily: true, desc: "Fragrant rice fried with toasted garlic." },
+    { name: "Coke", cat: "Drinks", kcal: 140, price: 25, daily: true, desc: "Ice-cold Coca-Cola to go with your meal." },
+    { name: "Iced Tea", cat: "Drinks", kcal: 90, price: 20, daily: true, desc: "Refreshing sweet iced tea served cold." },
+    { name: "Lime Juice", cat: "Drinks", kcal: 80, price: 25, daily: true, desc: "Fresh calamansi-lime juice, sweet and sour." }
+  ];
+
+  const days = Object.keys(schedule);
+  const categories = ["Chicken", "Pork", "Beef", "Fish", "Vegetable", "Rice", "Drinks"];
+  const emojis = { Chicken: "🍗", Pork: "🥓", Beef: "🥩", Fish: "🐟", Vegetable: "🥬", Rice: "🍚", Drinks: "🥤" };
+
+  const grid = document.getElementById("grid");
+  const countEl = document.getElementById("count");
+  const emptyEl = document.getElementById("empty");
+  const subtitleEl = document.getElementById("subtitle");
+  const searchInput = document.getElementById("searchInput");
+  const categoryList = document.getElementById("categoryList");
+  const daySelect = document.getElementById("daySelect");
+
+  //  DAY DROPDOWN (defaults to today, weekends go to Monday) 
+  daySelect.innerHTML = days.map(d => `<option value="${d}">${d}</option>`).join("");
+  const today = new Date().getDay(); // 0 = Sun, 1 = Mon ... 6 = Sat
+  daySelect.value = (today >= 1 && today <= 5) ? days[today - 1] : "Monday";
+
+  // BUILD CATEGORY CHECKBOXES 
+  categoryList.innerHTML = `<label><input type="checkbox" value="All" checked> All</label>` +
+    categories.map(c => `<label><input type="checkbox" value="${c}"> ${c}</label>`).join("");
+
+  const checkboxes = categoryList.querySelectorAll("input");
+  const allBox = checkboxes[0];
+
+  // RENDER CARDS 
+  function slug(name) {
+    return name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  }
+
+  function render(list) {
+    grid.innerHTML = list.map(m => `
+      <div class="card">
+        <div class="img">
+          <img src="CSS/${m.name}.png" alt="${m.name}"
+               onerror="this.parentElement.innerHTML='${emojis[m.cat]}'">
+        </div>
+        <div class="title-row">
+          <h3>${m.name}</h3>
+          ${m.popular ? '<span class="badge">Popular</span>' : ''}
+          ${m.daily ? '<span class="badge daily">Everyday</span>' : ''}
+        </div>
+        <p class="desc">${m.desc}</p>
+        <div class="bottom">
+          <span class="kcal">${m.kcal} kcal</span>
+          <span class="price">₱${m.price}</span>
+        </div>
+      </div>
+    `).join("");
+
+    countEl.textContent = list.length + " Menu Items";
+    emptyEl.style.display = list.length ? "none" : "block";
+  }
+
+  // FILTER SEARCH DAY
+  function applyFilters() {
+    const day = daySelect.value;
+    const text = searchInput.value.trim().toLowerCase();
+    const selected = [...checkboxes].filter(c => c.checked && c.value !== "All").map(c => c.value);
+
+    subtitleEl.textContent = day + "'s menu. Rice and drinks are available every day.";
+
+    const available = [...schedule[day], ...everyday];
+
+    const result = available.filter(m => {
+      const matchCat = selected.length === 0 || selected.includes(m.cat);
+      const matchText = m.name.toLowerCase().includes(text) || m.desc.toLowerCase().includes(text);
+      return matchCat && matchText;
+    });
+
+    render(result);
+  }
+
+  // checkbox behavior
+  checkboxes.forEach(box => {
+    box.addEventListener("change", () => {
+      if (box === allBox && box.checked) {
+        checkboxes.forEach(c => { if (c !== allBox) c.checked = false; });
+      } else if (box !== allBox && box.checked) {
+        allBox.checked = false;
+      }
+      if (![...checkboxes].some(c => c.checked)) allBox.checked = true;
+      applyFilters();
+    });
+  });
+
+  // day dropdown
+  daySelect.addEventListener("change", applyFilters);
+
+  // search 
+  searchInput.addEventListener("input", applyFilters);
+  document.getElementById("searchBtn").addEventListener("click", applyFilters);
+  searchInput.addEventListener("keydown", e => { if (e.key === "Enter") applyFilters(); });
+
+  // clear all
+  document.getElementById("clearBtn").addEventListener("click", () => {
+    checkboxes.forEach(c => c.checked = false);
+    allBox.checked = true;
+    searchInput.value = "";
+    applyFilters();
+  });
+
+  // first load
+  applyFilters();
+</script>
+</body>
+</html>

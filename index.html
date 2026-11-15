@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adamson Canteen - Full Menu</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", Arial, sans-serif; background: #fffaf0; color: #1a1a1a; }
+
+ 
+  header { display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; background: #fff; }
+  .logo { font-size: 26px; font-weight: 800; color: #1100cb; text-decoration: none; }
+  .logo span { display: block; font-size: 9px; letter-spacing: 2px; color: #333; }
+  nav a { margin: 0 14px; text-decoration: none; color: #555; font-size: 14px; }
+  nav a.active { color: #000; font-weight: 600; }
+
+  /* hero */
+  .hero { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 60px 48px; flex-wrap: wrap; }
+  .hero-text { flex: 1; min-width: 300px; max-width: 520px; }
+  .hero h1 { font-size: 52px; line-height: 1.15; }
+  .hero h1 .blue { color: #1100cb; }
+  .hero h1 .dark { color: #111024; }
+  .hero p { color: #666; font-size: 14px; line-height: 1.7; margin: 22px 0 28px; }
+  .btn { display: inline-block; background: #1100cb; color: #fffafa; text-decoration: none; padding: 13px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; border: none; cursor: pointer; }
+  .btn:hover { background: #111024; }
+
+  .plate { width: 380px; height: 380px; max-width: 100%; border-radius: 50%; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.12); overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 130px; }
+  .plate img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* featured Meals */
+  .featured { padding: 40px 48px; }
+  .section-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; gap: 16px; }
+  .section-top small { color: #1100cb; font-weight: 600; font-size: 13px; }
+  .section-top h2 { font-size: 30px; margin-top: 4px; }
+  .section-top p { color: #777; font-size: 13px; margin-top: 6px; }
+  .arrows { display: flex; gap: 10px; }
+  .arrows button { color:white;width: 44px; height: 44px; border-radius: 50%; border: none; background: #1100cb; font-size: 20px; cursor: pointer; }
+  .arrows button:hover { background: #111024; }
+
+  
+  .slider { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 6px 2px 16px; scrollbar-width: none; }
+  .slider::-webkit-scrollbar { display: none; }
+
+  .card { flex: 0 0 270px; scroll-snap-align: start; background: #26253a; border: 1px solid #2a2a2a; border-radius: 20px; padding: 14px 14px 18px; color: #fff; transition: transform .2s; }
+  .card:hover { transform: translateY(-4px); }
+  .card .img { width: 100%; height: 170px; border-radius: 14px; overflow: hidden; background: #1c1c1c; display: flex; align-items: center; justify-content: center; font-size: 60px; }
+  .card .img img { width: 100%; height: 100%; object-fit: cover; }
+  .title-row { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; gap: 8px; }
+  .title-row h3 { font-size: 18px; }
+  .badge { background: #0f3d22; color: #22c55e; font-size: 12px; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+  .desc { font-size: 13px; line-height: 1.5; color: #ddd; margin: 12px 0 16px; min-height: 58px; }
+  .bottom { display: flex; justify-content: space-between; align-items: center; }
+  .kcal { color: #ccc; font-size: 15px; }
+  .price { color: #22c55e; font-size: 22px; font-weight: 700; }
+
+  /* promo */
+  .promo { color: white;margin: 40px 48px 60px; background: #111024; border-radius: 24px; padding: 50px 56px; display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+  .promo-text { max-width: 420px; }
+  .promo h2 { font-size: 38px; line-height: 1.2; }
+  .promo p { font-size: 13px; color: #ffffff; line-height: 1.6; margin: 16px 0; }
+  .promo .discount { font-weight: 700; font-size: 16px; margin-bottom: 22px; }
+  .promo .btn { color:rgb(255, 255, 255); background: #1100cb; }
+  .promo .btn:hover { color: black;background: white; }
+  .promo-img { width: 300px; height: 300px; max-width: 100%; border-radius: 25px; background: #fff3c4; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 110px; }
+  .promo-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  footer { text-align: center; font-size: 12px; color: #888; padding: 24px; }
+
+  /* nutrition  */
+.nutrition { margin: 40px 48px; background: #111024; border-radius: 24px; padding: 36px; color: #fff; }
+.nutrition .tag { display: inline-block; background: #0f3d22; color: #22c55e; font-size: 12px; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; }
+.nutrition h2 { font-size: 30px; }
+.nutrition .sub { font-size: 13px; color: #ccc; margin-top: 6px; margin-bottom: 22px; }
+.nutrition .photo { width: 100%; height: 340px; border-radius: 18px; overflow: hidden; background: #1c1c1c; display: flex; align-items: center; justify-content: center; font-size: 90px; }
+.nutrition .photo img { width: 100%; height: 100%; object-fit: cover; }
+.tips { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 32px; margin: 26px 0; }
+.tip .icon { font-size: 22px; margin-bottom: 8px; }
+.tip h3 { font-size: 15px; margin-bottom: 4px; }
+.tip p { font-size: 13px; color: #ccc; }
+.remember { background: #26253a; border-radius: 12px; padding: 18px 20px; }
+.remember h4 { font-size: 14px; margin-bottom: 6px; }
+.remember p { font-size: 14px; line-height: 1.6; color: #ddd; }
+
+  @media (max-width: 800px) {
+    header, .hero, .featured { padding-left: 18px; padding-right: 18px; }
+    .promo { margin-left: 18px; margin-right: 18px; padding: 32px 24px; }
+    nav { display: none; }
+    .hero h1 { font-size: 38px; }
+    .arrows { display: none; }
+    .nutrition { margin-left: 18px; margin-right: 18px; padding: 24px; }
+.nutrition .photo { height: 220px; }
+.tips { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="indexx.html" class="logo">ADAMSON<span>CANTEEN</span></a>
+  <nav>
+    <a href="indexx.html" class="active">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1><span class="blue">Delicious Meals</span> for<br><span class="dark">Every Campus Day.</span></h1>
+    <p>Explore a variety of affordable, flavorful, and satisfying meals made for students. Find your favorites, check nutritional information, and discover something delicious for lunch.</p>
+    <a href="menu.html" class="btn">View Full Menu</a>
+  </div>
+  <div class="plate">
+    <img src="CSS/Beef Tapa.png" alt="Featured dish" >
+  </div>
+</section>
+
+<!-- FEATURED MEALS -->
+<section class="featured">
+  <div class="section-top">
+    <div>
+      <small>Menu</small>
+      <h2>Featured Meals</h2>
+      <p>Our customers' favorites. Slide to see more.</p>
+    </div>
+    <div class="arrows">
+      <button id="prev" aria-label="Previous">&#10094;</button>
+      <button id="next" aria-label="Next">&#10095;</button>
+    </div>
+  </div>
+  <div class="slider" id="slider"></div>
+</section>
+
+
+<section class="nutrition">
+  
+  <h2>Eat Smart. Stay Healthy.</h2>
+  <p class="sub">Simple nutrition tips to help students make better food choices every day.</p>
+
+  <div class="photo">
+    <img src="CSS/healthy.png" alt="Healthy plate" onerror="this.parentElement.innerHTML='🥗'">
+  </div>
+
+  <div class="tips">
+    <div class="tip">
+      <div class="icon">🥗</div>
+      <h3>Balanced Meals</h3>
+      <p>Build a nutritious plate.</p>
+    </div>
+    <div class="tip">
+      <div class="icon">💧</div>
+      <h3>Stay Hydrated</h3>
+      <p>Choose water regularly.</p>
+    </div>
+    <div class="tip">
+      <div class="icon">🍎</div>
+      <h3>Healthy Snacks</h3>
+      <p>Choose fruits and nutritious snacks.</p>
+    </div>
+    <div class="tip">
+      <div class="icon">❤️</div>
+      <h3>Smart Choices</h3>
+      <p>Make healthier food decisions.</p>
+    </div>
+  </div>
+
+  <div class="remember">
+    <h4>Remember:</h4>
+    <p>Healthy eating isn't about avoiding your favorite foods. It's about balance, variety, and making better choices consistently.</p>
+  </div>
+</section>
+
+
+<section class="promo">
+  <div class="promo-text">
+    <h2>Holiday Special<br>Offer For You.</h2>
+    <p>Treat yourself and bring at least 5 friends or classmates and present your student ID's to access the limited promo.</p>
+    <div class="discount">Up to 20% discount!</div>
+    <a href="menu.html" class="btn">Get Offer</a>
+  </div>
+  <div class="promo-img">
+    <img src="CSS/group.png" alt="Holiday special" onerror="this.parentElement.innerHTML='🍝'">
+  </div>
+</section>
+
+<footer>© 2026 Adamson Canteen. All rights reserved.</footer>
+
+<script>
+  //  FEatured meals
+ const featured = [
+  { name: "Chicken Adobo", img: "Chicken Adobo.png", cat: "Chicken", kcal: 520, price: 75, popular: true, desc: "Tender chicken simmered in soy sauce, vinegar, and garlic, served with rice." },
+  { name: "Pork Sisig", img: "Pork Sisig.png", cat: "Pork", kcal: 650, price: 90, popular: true, desc: "Sizzling chopped pork seasoned with onions and spices." },
+  { name: "Fried Chicken", img: "Fried Chicken.png", cat: "Chicken", kcal: 650, price: 85, popular: true, desc: "Crispy golden fried chicken served with steamed rice." },
+  { name: "Beef Tapa", img: "Beef Tapa.png", cat: "Beef", kcal: 620, price: 95, desc: "Marinated beef strips served with garlic rice." },
+  { name: "Lechon Kawali", img: "Lechon Kawali.png", cat: "Pork", kcal: 750, price: 100, popular: true, desc: "Deep-fried crispy pork belly served with rice and dipping sauce." },
+  { name: "Chicken Inasal", img: "Chicken Inasal.png", cat: "Chicken", kcal: 610, price: 90, popular: true, desc: "Grilled chicken marinated with lemongrass and local spices." },
+  { name: "Beef Caldereta", img: "Beef Caldereta.png", cat: "Beef", kcal: 680, price: 100, desc: "Tender beef stewed in rich tomato sauce with potatoes and carrots." },
+  { name: "Fried Bangus", img: "Fried Bangus.png", cat: "Fish", kcal: 580, price: 80, desc: "Crispy fried milkfish served with rice and dipping sauce." }
+];
+
+  const emojis = { Chicken: "🍗", Pork: "🥓", Beef: "🥩", Fish: "🐟", Vegetable: "🥬" };
+  const slider = document.getElementById("slider");
+
+  function slug(name) {
+    return name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  }
+
+slider.innerHTML = featured.map(m => `
+  <div class="card">
+    <div class="img">
+     <img src="CSS/${m.img}" alt="${m.name}"
+           onerror="this.parentElement.innerHTML='${emojis[m.cat]}'">
+    </div>
+    <div class="title-row">
+      <h3>${m.name}</h3>
+      ${m.popular ? '<span class="badge">Popular</span>' : ''}
+    </div>
+    <p class="desc">${m.desc}</p>
+    <div class="bottom">
+      <span class="kcal">${m.kcal} kcal</span>
+      <span class="price">₱${m.price}</span>
+    </div>
+  </div>
+`).join("");
+
+  // SLIDER ARROWS 
+  const step = 290; // card width + gap
+  document.getElementById("next").addEventListener("click", () => {
+    const atEnd = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5;
+    if (atEnd) slider.scrollTo({ left: 0 });
+    else slider.scrollBy({ left: step });
+  });
+  document.getElementById("prev").addEventListener("click", () => {
+    if (slider.scrollLeft <= 5) slider.scrollTo({ left: slider.scrollWidth });
+    else slider.scrollBy({ left: -step });
+  });
+
+  // slide
+  let isDown = false, startX, startScroll;
+  slider.addEventListener("mousedown", e => {
+    isDown = true;
+    startX = e.pageX;
+    startScroll = slider.scrollLeft;
+    slider.style.scrollBehavior = "auto";
+    slider.style.scrollSnapType = "none";
+  });
+  window.addEventListener("mouseup", () => {
+    if (!isDown) return;
+    isDown = false;
+    slider.style.scrollBehavior = "smooth";
+    slider.style.scrollSnapType = "x mandatory";
+  });
+  slider.addEventListener("mousemove", e => {
+    if (!isDown) return;
+    e.preventDefault();
+    slider.scrollLeft = startScroll - (e.pageX - startX);
+  });
+
+</script>
+</body>
+</html>
